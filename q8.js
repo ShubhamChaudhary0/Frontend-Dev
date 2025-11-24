@@ -1,15 +1,12 @@
-// Q8 – Retry Logic
-function submitOrder(){return new Promise((res,rej)=>setTimeout(()=>Math.random()<0.5?res():rej(),1000));}
-async function processOrder(){
-  for(let i=1;i<=3;i++){
-    try{
-      await submitOrder();
-      console.log('Attempt', i, 'Success');
-      return;
-    } catch{
-      console.log('Attempt', i, 'Failed');
-    }
-  }
-  throw new Error('Order could not be processed');
+// Q8 – Movie Ticket Booking
+class MovieTicket{
+  constructor(movie, seat, price){ this.movieName=movie; this.seatNo=seat; this.price=price; }
 }
-processOrder().catch(console.log);
+MovieTicket.prototype.printTicket=function(){ console.log('Movie:',this.movieName,'Seat:',this.seatNo,'Price:',this.price); };
+class OnlineTicket extends MovieTicket{
+  constructor(movie,seat,price,fee){ super(movie,seat,price); this.convenienceFee=fee; }
+  getTotalAmount(){ return this.price + this.convenienceFee; }
+}
+const t=new OnlineTicket('Avengers',12,300,50);
+t.printTicket();
+console.log('Total:', t.getTotalAmount());

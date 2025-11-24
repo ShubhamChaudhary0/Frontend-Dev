@@ -1,21 +1,23 @@
-// Q1 – Async Coffee Maker
-function boilWater() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => Math.random() < 0.9 ? resolve('Water boiled') : reject('Boiling failed'), 1000);
-  });
+// Q1 – Student Result Processing
+class Student {
+  constructor(name, marks) {
+    this.name = name;
+    this.marks = marks;
+  }
+  calculateAverage() {
+    return this.marks.reduce((a, b) => a + b, 0) / this.marks.length;
+  }
+  getGrade() {
+    const avg = this.calculateAverage();
+    if (avg >= 90) return 'A';
+    if (avg >= 75) return 'B';
+    if (avg >= 50) return 'C';
+    return 'F';
+  }
 }
-function brewCoffee() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => Math.random() < 0.9 ? resolve('Coffee brewed') : reject('Brewing failed'), 1200);
-  });
-}
-function pourCoffee() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => Math.random() < 0.9 ? resolve('Coffee poured') : reject('Pouring failed'), 1500);
-  });
-}
-boilWater()
-  .then(res => { console.log(res); return brewCoffee(); })
-  .then(res => { console.log(res); return pourCoffee(); })
-  .then(res => console.log(res + '\nCoffee ready for the team!'))
-  .catch(err => console.log('Error:', err));
+const s1 = new Student('Yash',[90,85,88]);
+const s2 = new Student('Raj',[70,65,60]);
+const s3 = new Student('Aman',[40,45,50]);
+console.log(s1.name, s1.getGrade());
+console.log(s2.name, s2.getGrade());
+console.log(s3.name, s3.getGrade());

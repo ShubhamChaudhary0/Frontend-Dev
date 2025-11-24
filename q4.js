@@ -1,9 +1,12 @@
-// Q4 – DevOps Delay
-const serverA = new Promise((res, rej) => setTimeout(() => Math.random()<0.9?res('Server A done'):rej('A failed'), 2000));
-const serverB = new Promise((res, rej) => setTimeout(() => Math.random()<0.9?res('Server B done'):rej('B failed'), 3000));
-Promise.all([serverA, serverB])
-  .then(() => console.log('Deployment completed for all servers'))
-  .catch(console.log);
-Promise.race([serverA, serverB])
-  .then(fast => console.log('Fastest response:', fast))
-  .catch(console.log);
+// Q4 – Employee Inheritance
+class Employee{
+  constructor(name, dept){ this.name=name; this.department=dept; }
+  work(){ console.log(this.name + ' is working'); }
+}
+class Manager extends Employee{
+  work(){ console.log(this.name + ' is managing the team'); }
+}
+const e=new Employee('Sam','HR');
+const m=new Manager('Ravi','IT');
+e.work();
+m.work();

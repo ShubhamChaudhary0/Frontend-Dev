@@ -1,10 +1,9 @@
-// Q3 – Bug Tracker: Promises
-function getBugs() {
-  return new Promise((resolve, reject) => {
-    const fail = Math.random() < 0.3;
-    setTimeout(() => fail ? reject('API Failure') : resolve(['UI glitch', 'API timeout', 'Login failure']), 1000);
-  });
-}
-getBugs()
-  .then(bugs => console.table(bugs))
-  .catch(err => console.log('Error:', err));
+// Q3 – Product Discount System
+function Product(name, price){ this.name=name; this.price=price; }
+Product.prototype.applyDiscount = function(percent){ return this.price - (this.price*percent/100); };
+const p1=new Product('Laptop',50000);
+const p2=new Product('Phone',20000);
+const p3=new Product('Watch',5000);
+console.log(p1.applyDiscount(10));
+console.log(p2.applyDiscount(20));
+console.log(p3.applyDiscount(5));

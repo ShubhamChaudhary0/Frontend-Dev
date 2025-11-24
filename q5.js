@@ -1,26 +1,15 @@
-// Q5 – Callback Hell and Async/Await
-function design(cb){setTimeout(()=>{console.log('Design');cb();},1000);} 
-function build(cb){setTimeout(()=>{console.log('Build');cb();},1000);} 
-function test(cb){setTimeout(()=>{console.log('Test');cb();},1000);} 
-function deploy(cb){setTimeout(()=>{console.log('Deploy');cb();},1000);} 
-function celebrate(cb){setTimeout(()=>{console.log('Celebrate');cb();},1000);} 
-
-design(()=>{
-  build(()=>{
-    test(()=>{
-      deploy(()=>{
-        celebrate(()=>{});
-      });
-    });
-  });
-});
-
-async function pipeline() {
-  const delay = msg => new Promise(r => setTimeout(()=>{console.log(msg);r();},1000));
-  await delay('Design');
-  await delay('Build');
-  await delay('Test');
-  await delay('Deploy');
-  await delay('Celebrate');
+// Q5 – Ride-Sharing
+class User{ constructor(name,rating){ this.name=name; this.rating=rating; }}
+class Driver extends User{ constructor(name,rating,vehicle){ super(name,rating); this.vehicle=vehicle; }}
+class Trip{
+  constructor(from,to,distance){ this.from=from; this.to=to; this.distance=distance; }
+  calculateFare(){ if(this.distance<=0) throw new Error('Invalid distance'); return this.distance*12; }
 }
-pipeline();
+try{
+  const t=new Trip('A','B',10);
+  console.log('Fare:', t.calculateFare());
+} catch(err){ console.log('Error:', err.message); }
+try{
+  const t2=new Trip('A','B',-5);
+  console.log(t2.calculateFare());
+} catch(err){ console.log('Error:', err.message); }
